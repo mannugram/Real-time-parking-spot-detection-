@@ -1,0 +1,14 @@
+import psycopg2
+
+try:
+    conn = psycopg2.connect(dbname="mannraval", user="postgres", password="yourpassword", host="localhost", port="5433")
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM parking_status;")
+        rows = cur.fetchall()
+        for row in rows:
+            print(row)
+except Exception as e:
+    print(f"Error querying the database: {e}")
+finally:
+    if conn:
+        conn.close()
